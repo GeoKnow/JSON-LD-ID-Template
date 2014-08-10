@@ -104,6 +104,27 @@ var fullJsonLd = _.extend(instanceJsonLd, sdContext);
 
 ```
 
+And the JSON-LD converted to turtle:
+
+```html
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+
+<http://example.org/resource/service-http%3A%2F%2Fdbpedia.org%2Fsparql>
+        a                   sd:Service ;
+        sd:availableGraphs  <http://example.org/resource/availableGraphs-http%3A%2F%2Fdbpedia.org%2Fsparql> .
+
+<http://example.org/resource/availableGraphs-http%3A%2F%2Fdbpedia.org%2Fsparql>
+        a              sd:GraphCollection ;
+        sd:namedGraph  <http://example.org/resource/namedGraph-http%3A%2F%2Fdbpedia.org%2Fsparql-http%3A%2F%2Fdbpedia.org> .
+
+<http://example.org/resource/namedGraph-http%3A%2F%2Fdbpedia.org%2Fsparql-http%3A%2F%2Fdbpedia.org>
+        a           sd:NamedGraph ;
+        rdfs:label  "DBpedia"@en , "DBpedia" ;
+        sd:name     <http://dbpedia.org> .
+
+```
+
 
 ## Future Work
 Add some simple template DSL to allow creating common URI designs inline, such as
