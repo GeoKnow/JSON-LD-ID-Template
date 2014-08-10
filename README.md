@@ -1,7 +1,10 @@
 JSON-LD-ID-Template
 ===================
 
-Simple templating tool for dynamically generating '@id' attributes of instances.
+Simple templating tool for dynamically generating attributes, such as '@id' and '@type', on the instance level.
+It is meant to be used for cases, where the JSON structure is already aligned with the structure of a specific vocabulary, and no further transformations are necessary.
+
+If you need transformations, you may want to check out the (json-ld-macros project)[https://github.com/antoniogarrote/json-ld-macros].
 
 ## Example
 
@@ -55,6 +58,7 @@ The following template is used to augment the plain json description with additi
 - Attributes starting with a `$` denote temporary values that will be omitted in the final object.
 - Parent functions are evaluated first, so children can access computed values in their parents.
 - Actually, this approach is not JSON-LD specific, as fields other than '@id' could be computed this way.
+- If an attribute, such as'@id', is computed over an array, you can use `this.$index` to access the index in the javascript array.
 
 ```javascript
 var sdTemplate = (function(base) {
@@ -76,7 +80,7 @@ var sdTemplate = (function(base) {
       namedGraph: {
         '@type': 'sd:NamedGraph',
         '@id': function() {
-          return base + 'namedGraph-' + this.$serviceUrlEnc + '-' + this.$graphUrlEnc;
+          return base + 'namedGraph-' + this.$serviceUrlEnc + '-' + this.$graphUrlEnc; // this.$index would be available here
         },
         name: {
           '@id': function() { return this.name; }
