@@ -102,7 +102,9 @@ var fullJsonLd = _.extend(instanceJsonLd, sdContext);
 Add some simple template DSL to allow creating common URI designs inline, such as
 ```
 {
-   '@id': '{base}/service{%this.endpoint}'
+   '@id': '{base}/service-{%this.endpoint}'
 }
 ```
+
+(where {%expr} would e.g. denote component encoding).
 
