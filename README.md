@@ -21,7 +21,7 @@ var sdJson =
       }
     }
   }]
-}
+};
 ```
 
 
@@ -43,7 +43,7 @@ var sdContext =
       "@container": "@language"
     }
   }
-}
+};
 ```
 
 However, in order to convert our initial data to JSON-LD, we want to be able to create useful URIs.
@@ -78,7 +78,7 @@ var sdTemplate = (function(base) {
       }
     }
   };
-})
+});
 ```
 
 ```javascript
