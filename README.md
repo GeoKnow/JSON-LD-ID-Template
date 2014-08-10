@@ -32,18 +32,20 @@ var sdContext =
 {
   "@context": {
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "availableGraphs": "http://www.w3.org/ns/sparql-service-description#availableGraphs",
-    "namedGraph": "http://www.w3.org/ns/sparql-service-description#namedGraph",
-      "name": {
-        "@id": "http://www.w3.org/ns/sparql-service-description#name",
-        "@type": "@id"
-      },
+    "sd": "http://www.w3.org/ns/sparql-service-description#",
+    "availableGraphs": "sd:availableGraphs",
+    "namedGraph": "sd:namedGraph",
+    "name": {
+      "@id": "sd:name",
+      "@type": "@id"
+    },
     "labels": {
       "@id": "rdfs:label",
       "@container": "@language"
     }
   }
-};
+}
+;
 ```
 
 However, in order to convert our initial data to JSON-LD, we want to be able to create useful URIs.
@@ -56,19 +58,23 @@ The following template is used to augment the plain json description with additi
 
 ```javascript
 var sdTemplate = (function(base) {
+  // Note that the base URI could be defined in the JSON-LD context as well.
   var base = "http://example.org/resource/";
 
   return {
+    '@type': 'sd:Service',
     '@id': function() {
       this.$serviceUrlEnc = encodeURIComponent(this.endpoint);
       return base + 'service-' + this.$serviceUrlEnc;
     },
     availableGraphs: {
+      '@type': 'sd:GraphCollection',
       '@id': function() {
         this.$graphUrlEnc = encodeURIComponent(this.namedGraph.name);
         return base + 'availableGraphs-' + this.$serviceUrlEnc;
       },
       namedGraph: {
+        '@type': 'sd:NamedGraph',
         '@id': function() {
           return base + 'namedGraph-' + this.$serviceUrlEnc + '-' + this.$graphUrlEnc;
         },
