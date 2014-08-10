@@ -27,19 +27,20 @@ var sdJson = {
 The JSON-LD context is static and can be kept in some place (such as a file or variable):
 
 ```javascript
-var sdContext = {
+var sdContext = 
+{
   "@context": {
-  "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-  "availableGraphs": "http://www.w3.org/ns/sparql-service-description#availableGraphs",
-  "namedGraph": "http://www.w3.org/ns/sparql-service-description#namedGraph",
-    "name": {
-      "@id": "http://www.w3.org/ns/sparql-service-description#name",
-     "@type": "@id"
-    },
-  },
-  "labels": {
-  "@id": "rdfs:label",
-  "@container": "@language"
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "availableGraphs": "http://www.w3.org/ns/sparql-service-description#availableGraphs",
+    "namedGraph": "http://www.w3.org/ns/sparql-service-description#namedGraph",
+      "name": {
+        "@id": "http://www.w3.org/ns/sparql-service-description#name",
+        "@type": "@id"
+      },
+    "labels": {
+      "@id": "rdfs:label",
+      "@container": "@language"
+    }
   }
 }
 ```
@@ -91,7 +92,7 @@ var templateFn = JsonLdIdTemplate.compile(template);
 var instanceJsonLd = templateFn(sdJson);
 
 // Create a full JSON-LD object by adding the static JSON-LD context to the instance
-var fullJsonLd = _(instanceJsonLd, sdContext);
+var fullJsonLd = _.extend(instanceJsonLd, sdContext);
 
 
 ```
