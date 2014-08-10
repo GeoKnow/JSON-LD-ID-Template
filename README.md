@@ -9,7 +9,8 @@ Let's assume we want to describe which graphs are available in the [DBpedia SPAR
 The JSON aligned with the [Service Description Vocabulary](http://www.w3.org/TR/sparql11-service-description/) may look like this:
 
 ```javascript
-var sdJson = {
+var sdJson =
+{
   "endpoint": "http://dbpedia.org/sparql",
   "availableGraphs": [{
     "namedGraph": {
